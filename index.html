@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ken CS Academy｜AP CSA / AP CSP / Cybersecurity 專業培訓</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue-50: #E6F1FB;
+    --blue-100: #B5D4F4;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --teal-50: #E1F5EE;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --coral-50: #FAECE7;
+    --coral-600: #993C1D;
+    --amber-50: #FAEEDA;
+    --amber-600: #854F0B;
+    --gray-50: #F7F7F5;
+    --gray-100: #EDEDEA;
+    --gray-400: #888780;
+    --gray-700: #444441;
+    --gray-900: #1A1A18;
+    --white: #FFFFFF;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Inter', sans-serif;
+    color: var(--gray-900);
+    background: var(--white);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-100);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo { font-size: 15px; font-weight: 700; color: var(--blue-600); letter-spacing: -0.01em; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { font-size: 14px; color: var(--gray-700); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--blue-600); }
+  .nav-cta {
+    font-size: 13px; font-weight: 500;
+    background: var(--blue-600); color: white;
+    padding: 7px 18px; border-radius: 20px;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .nav-cta:hover { background: var(--blue-800); }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+  }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    background: linear-gradient(180deg, var(--blue-50) 0%, var(--white) 100%);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--blue-50); color: var(--blue-800);
+    font-size: 12px; font-weight: 500;
+    padding: 5px 16px; border-radius: 20px;
+    margin-bottom: 1.5rem; letter-spacing: 0.04em;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 700; line-height: 1.25;
+    margin-bottom: 1rem; letter-spacing: -0.02em;
+  }
+  .hero h1 em { font-style: normal; color: var(--blue-600); }
+  .hero-sub {
+    font-size: 16px; color: var(--gray-400);
+    max-width: 540px; margin: 0 auto 2.5rem;
+  }
+  .hero-stats {
+    display: flex; justify-content: center;
+    gap: 2.5rem; flex-wrap: wrap;
+  }
+  .hero-stat .num {
+    font-size: 28px; font-weight: 700;
+    color: var(--blue-600); letter-spacing: -0.02em;
+  }
+  .hero-stat .lbl {
+    font-size: 12px; color: var(--gray-400); margin-top: 2px;
+  }
+
+  /* SECTIONS */
+  section { padding: 4rem 2rem; }
+  section:nth-child(even) { background: var(--gray-50); }
+  .section-inner { max-width: 860px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--blue-600);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 700; margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* REASONS */
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 14px;
+  }
+  .reason-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.25rem;
+  }
+  .reason-icon {
+    width: 40px; height: 40px;
+    background: var(--blue-50); border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 20px;
+  }
+  .reason-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .reason-card p { font-size: 13px; color: var(--gray-400); line-height: 1.65; }
+
+  /* COURSES */
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .course-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex; flex-direction: column;
+  }
+  .course-card.featured {
+    border: 2px solid var(--blue-600);
+  }
+  .course-tag {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    padding: 3px 10px; border-radius: 12px; margin-bottom: 12px;
+    width: fit-content;
+  }
+  .tag-best { background: var(--blue-600); color: white; }
+  .tag-csp  { background: var(--teal-50); color: var(--teal-800); }
+  .tag-cyber{ background: var(--coral-50); color: var(--coral-600); }
+  .course-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+  .price-row { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
+  .price-num { font-size: 26px; font-weight: 700; color: var(--blue-600); }
+  .price-unit { font-size: 13px; color: var(--gray-400); }
+  .price-note { font-size: 12px; color: var(--gray-400); margin-bottom: 1rem; }
+  .course-ul { list-style: none; flex: 1; }
+  .course-ul li {
+    font-size: 13px; color: var(--gray-700);
+    padding: 4px 0; display: flex; gap: 8px;
+    border-bottom: 1px solid var(--gray-100);
+    line-height: 1.5;
+  }
+  .course-ul li:last-child { border-bottom: none; }
+  .course-ul li::before {
+    content: "✓"; color: var(--teal-600);
+    font-size: 12px; font-weight: 700;
+    margin-top: 3px; flex-shrink: 0;
+  }
+  .fee-note {
+    font-size: 12px; color: var(--gray-400);
+    margin-top: 1.5rem;
+    padding: 12px 16px;
+    background: var(--amber-50); border-radius: var(--radius-md);
+  }
+
+  /* TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item {
+    display: flex; gap: 1.5rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-time {
+    font-size: 13px; font-weight: 700; color: var(--blue-600);
+    min-width: 72px; padding-top: 2px;
+  }
+  .tl-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .tl-content p { font-size: 13px; color: var(--gray-400); line-height: 1.65; }
+
+  /* SCORES */
+  .year-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .year-tab {
+    font-size: 13px; font-weight: 500;
+    padding: 6px 16px; border-radius: 20px;
+    border: 1px solid var(--gray-100);
+    background: var(--white); color: var(--gray-400);
+    cursor: pointer; transition: all 0.15s;
+  }
+  .year-tab:hover { border-color: var(--blue-600); color: var(--blue-600); }
+  .year-tab.active { background: var(--blue-600); color: white; border-color: var(--blue-600); }
+  .scores-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .scores-table th {
+    text-align: left; padding: 10px 14px;
+    font-size: 12px; font-weight: 500; color: var(--gray-400);
+    border-bottom: 2px solid var(--gray-100);
+  }
+  .scores-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .scores-table tr:last-child td { border-bottom: none; }
+  .scores-table tr:hover td { background: var(--gray-50); }
+  .badge {
+    display: inline-flex; align-items: center;
+    font-size: 13px; font-weight: 700;
+    padding: 3px 12px; border-radius: 12px;
+  }
+  .badge-5 { background: var(--teal-50); color: var(--teal-800); }
+  .badge-4 { background: var(--blue-50); color: var(--blue-800); }
+  .badge-3 { background: var(--gray-100); color: var(--gray-700); }
+  .uni-tag {
+    font-size: 11px; color: var(--gray-400);
+    background: var(--gray-50); padding: 2px 8px;
+    border-radius: 8px;
+  }
+  .year-panel { display: none; }
+  .year-panel.active { display: block; }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+  }
+  @media (max-width: 560px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-bio { font-size: 14px; color: var(--gray-400); line-height: 1.75; margin-bottom: 1.5rem; }
+  .exp-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .exp-item {
+    font-size: 13px; padding: 10px 14px;
+    background: var(--white); border: 1px solid var(--gray-100);
+    border-radius: var(--radius-md);
+    display: flex; gap: 10px; align-items: flex-start;
+    line-height: 1.5;
+  }
+  .exp-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--blue-600); flex-shrink: 0; margin-top: 5px;
+  }
+  .cert-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  }
+  .cert-chip {
+    font-size: 12px; font-weight: 500;
+    padding: 6px 12px; border-radius: var(--radius-sm);
+    background: var(--blue-50); color: var(--blue-800);
+    text-align: center;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--blue-600); color: white;
+    padding: 4rem 2rem; text-align: center;
+  }
+  .contact-section h2 { font-size: 24px; font-weight: 700; margin-bottom: 0.5rem; }
+  .contact-section p { font-size: 15px; opacity: 0.8; margin-bottom: 2rem; }
+  .contact-cards {
+    display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 2rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .contact-card .icon { font-size: 22px; }
+  .contact-card .info { text-align: left; }
+  .contact-card .info-label { font-size: 11px; opacity: 0.65; margin-bottom: 2px; }
+  .contact-card .info-val { font-size: 15px; font-weight: 700; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 1.5rem;
+    font-size: 12px; color: var(--gray-400);
+    border-top: 1px solid var(--gray-100);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Ken CS Academy</span>
+  <ul class="nav-links">
+    <li><a href="#courses">課程</a></li>
+    <li><a href="#scores">歷屆成績</a></li>
+    <li><a href="#about">師資介紹</a></li>
+    <li><a href="#contact">聯絡我們</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">預約諮詢</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-badge">台中中部地區 ‧ 視訊授課 ‧ 10+ 年 AP 教學</div>
+  <h1>AP Computer Science<br><em>專業培訓，成績看得見</em></h1>
+  <p class="hero-sub">結合 Oracle Java 原廠認證、17 年大學資工教學與業界資安實務，協助學生 AP CSA / AP CSP 取得 4–5 分，奠定頂尖大學申請基礎。</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">10+</div><div class="lbl">年 AP 教學經驗</div></div>
+    <div class="hero-stat"><div class="num">17+</div><div class="lbl">年大學資工授課</div></div>
+    <div class="hero-stat"><div class="num">Harvard</div><div class="lbl">學生錄取頂尖名校</div></div>
+    <div class="hero-stat"><div class="num">9–10</div><div class="lbl">個月完整培訓</div></div>
+  </div>
+</section>
+
+<!-- REASONS -->
+<section id="why">
+  <div class="section-inner">
+    <div class="eyebrow">為什麼選擇 Ken 老師</div>
+    <h2 class="section-title">實力與經驗，四大優勢</h2>
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <div class="reason-icon">🏅</div>
+        <h3>Oracle 原廠認證</h3>
+        <p>巨匠電腦逢甲認證中心 Oracle Java OCJP 原廠認證講師，確保最純正的 Java 程式設計教學。</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">🎓</div>
+        <h3>豐富學術資歷</h3>
+        <p>國立大學資工系 17 年授課、中部私中國際部 10 年 AP CSA / CSP 教學，深諳考點與解題技巧。</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">🛡️</div>
+        <h3>業界資安實務</h3>
+        <p>矽品精密工業系統工程師資歷，具備 CCNA、CCNP、MCSE 等完整 IT 資安認證，理論實作並重。</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">🏆</div>
+        <h3>高分成績保證</h3>
+        <p>SAT 1300+ 且配合度高的學生，AP CSA 可衝 5 分。歷屆學員進入 Harvard、UCSD 等世界名校。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="section-inner">
+    <div class="eyebrow">課程方案</div>
+    <h2 class="section-title">三大課程，擇一報名</h2>
+    <div class="courses-grid">
+      <div class="course-card featured">
+        <span class="course-tag tag-best">⭐ 最多學生選擇</span>
+        <h3>AP Computer Science A</h3>
+        <div class="price-row">
+          <span class="price-num">$1,700</span>
+          <span class="price-unit">元 / 小時</span>
+        </div>
+        <div class="price-note">每堂 1.5–2 小時</div>
+        <ul class="course-ul">
+          <li>Java 程式設計完整教學</li>
+          <li>近 15 年 MCQ &amp; FRQ 逐步解說與實作</li>
+          <li>8–1 月教授課程、2–4 月考題演練</li>
+          <li>課後作業與測驗追蹤</li>
+          <li>SAT 1300+ 可衝 5 分</li>
+        </ul>
+      </div>
+      <div class="course-card">
+        <span class="course-tag tag-csp">AP CSP</span>
+        <h3>AP Computer Science Principles</h3>
+        <div class="price-row">
+          <span class="price-num">$1,600</span>
+          <span class="price-unit">元 / 小時</span>
+        </div>
+        <div class="price-note">每堂 1.5–2 小時</div>
+        <ul class="course-ul">
+          <li>運算思維與資料概念</li>
+          <li>程式設計基礎實作</li>
+          <li>8–1 月教授課程、2–4 月考題演練</li>
+          <li>課後作業與測驗追蹤</li>
+        </ul>
+      </div>
+      <div class="course-card">
+        <span class="course-tag tag-cyber">Cybersecurity</span>
+        <h3>資安課程</h3>
+        <div class="price-row">
+          <span class="price-num">$1,700</span>
+          <span class="price-unit">元 / 小時</span>
+        </div>
+        <div class="price-note">每堂 1.5–2 小時</div>
+        <ul class="course-ul">
+          <li>網路管理與資安實務</li>
+          <li>業界工具操作與演練</li>
+          <li>結合 IT 認證備考</li>
+          <li>視訊授課，彈性排程</li>
+        </ul>
+      </div>
+    </div>
+    <p class="fee-note">💡 每月第一週核算上月學費，請於一週內繳費。10 月後報名需視情況加課。</p>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="schedule">
+  <div class="section-inner">
+    <div class="eyebrow">培訓流程</div>
+    <h2 class="section-title">9–10 個月完整培訓規劃</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">8 月</div>
+        <div class="tl-content">
+          <h4>課程開始，打穩基礎</h4>
+          <p>Java 語法與核心觀念，第 3 堂起視學習情況調整進度，課後作業與測驗持續追蹤。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">9–1 月</div>
+        <div class="tl-content">
+          <h4>課程主體教授</h4>
+          <p>完整講授 AP CSA 所有考試範圍，涵蓋物件導向、資料結構、演算法等核心主題。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">農曆春節</div>
+        <div class="tl-content">
+          <h4>停課 1 週</h4>
+          <p>農曆春節期間休息一週，其餘連假請提早安排補課。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">2–4 月</div>
+        <div class="tl-content">
+          <h4>考題演練衝刺</h4>
+          <p>逐步解說近 15 年 MCQ &amp; FRQ 歷屆試題。四月禁止請假，全力衝刺考前準備。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">5 月</div>
+        <div class="tl-content">
+          <h4>AP 考試</h4>
+          <p>目標 4–5 分，奠定頂尖大學申請基礎。SAT 1300+ 且配合度高的學生可衝 5 分。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCORES -->
+<section id="scores">
+  <div class="section-inner">
+    <div class="eyebrow">歷屆成績</div>
+    <h2 class="section-title">學生 AP CSA 成績榜單</h2>
+    <div class="year-tabs">
+      <button class="year-tab active" onclick="showYear('2025', this)">2025</button>
+      <button class="year-tab" onclick="showYear('2024', this)">2024</button>
+      <button class="year-tab" onclick="showYear('2023', this)">2023</button>
+      <button class="year-tab" onclick="showYear('2022', this)">2022</button>
+      <button class="year-tab" onclick="showYear('2021', this)">2021</button>
+      <button class="year-tab" onclick="showYear('2020', this)">2020</button>
+    </div>
+
+    <div id="p2025" class="year-panel active">
+      <table class="scores-table">
+        <thead><tr><th>學校</th><th>學生</th><th>年級</th><th>AP 成績</th></tr></thead>
+        <tbody>
+          <tr><td>WHS</td><td>Mickey</td><td>11</td><td><span class="badge badge-5">5</span></td></tr>
+          <tr><td>WHS</td><td>Justin</td><td>10</td><td><span class="badge badge-5">5</span></td></tr>
+          <tr><td>WHS</td><td>Bernie</td><td>10</td><td><span class="badge badge-5">5</span></td></tr>
+          <tr><td>WHS</td><td>Rita</td><td>10</td><td><span class="badge badge-5">5</span></td></tr>
+          <tr><td>Fairmont Prep</td><td>Daniel</td><td>11</td><td><span class="badge badge-5">5</span></td></tr>
+          <tr><td>WHS</td><td>Wesley</td><td>10</td><td><span class="badge badge-4">4</span></td></tr>
+          <tr><td>AST</td><td>Darryl</td><td>11</td><td><span class="badge badge-4">4</span></td></tr>
+          <tr><td>AST</td><td>Jadon</td><td>11</td><td><span class="badge badge-4">4</span></td></tr>
+          <tr><td>HWIS（弘文）</td><td>Jordan</td><td>11</td><td><span class="badge badge-4">4</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="p2024" class="year-panel">
+      <table class="scores-table">
+        <thead><tr><th>學校</th><th>學生</th><th>年級</th><th>AP 成績</th></tr></thead>
+        <tbody>
+          <tr><td>WHS</td><td>Robert</td><td>11</td><td><span class="badge badge-5">5</span></td></tr>
+          <tr><td>WHS</td><td>Frank</td><td>11</td><td><span class="badge badge-5">5</span></td></tr>
+          <tr><td>WHS</td><td>Rachel</td><td>11</td><td><span class="badge badge-5">5</span></td></tr>
+          <tr><td>WHS</td><td>Amelia</td><td>8</td><td><span class="badge badge-5">5</span></td></tr>
+          <tr><td>WHS</td><td>Henry</td><td>10</td><td><span class="badge badge-4">4</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="p2023" class="year-panel">
+      <table class="scores-table">
+        <thead><tr><th>學校</th><th>學生</th><th>年級</th><th>AP 成績</th><th>錄取大學</th></tr></thead>
+        <tbody>
+          <tr><td>維多利亞</td><td>Jayden</td><td>12</td><td><span class="badge badge-5">5</span></td><td><span class="uni-tag">UW–Madison</span></td></tr>
+          <tr><td>AST</td><td>Angela</td><td>10</td><td><span class="badge badge-4">4</span></td><td></td></tr>
+          <tr><td>AST</td><td>Gary</td><td>10</td><td><span class="badge badge-4">4</span></td><td></td></tr>
+          <tr><td>WHS</td><td>Patrick</td><td>10</td><td><span class="badge badge-4">4</span></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="p2022" class="year-panel">
+      <table class="scores-table">
+        <thead><tr><th>學校</th><th>學生</th><th>年級</th><th>AP 成績</th><th>錄取大學</th></tr></thead>
+        <tbody>
+          <tr><td>WHS</td><td>Danny</td><td>11</td><td><span class="badge badge-5">5</span></td><td><span class="uni-tag">Harvard University</span></td></tr>
+          <tr><td>WHS</td><td>Sky</td><td>11</td><td><span class="badge badge-5">5</span></td><td><span class="uni-tag">Purdue University</span></td></tr>
+          <tr><td>AST</td><td>Max</td><td>11</td><td><span class="badge badge-5">5</span></td><td></td></tr>
+          <tr><td>WHS</td><td>Thomas</td><td>11</td><td><span class="badge badge-5">5</span></td><td></td></tr>
+          <tr><td>AST</td><td>Rick</td><td>11</td><td><span class="badge badge-5">5</span></td><td></td></tr>
+          <tr><td>弘文</td><td>Max</td><td>11</td><td><span class="badge badge-5">5</span></td><td><span class="uni-tag">Univ. of Waterloo</span></td></tr>
+          <tr><td>WHS</td><td>Jeffrey</td><td>11</td><td><span class="badge badge-4">4</span></td><td><span class="uni-tag">UT Austin</span></td></tr>
+          <tr><td>WHS</td><td>Richard</td><td>11</td><td><span class="badge badge-4">4</span></td><td><span class="uni-tag">Boston University</span></td></tr>
+          <tr><td>WHS</td><td>Henry</td><td>11</td><td><span class="badge badge-4">4</span></td><td><span class="uni-tag">UCI</span></td></tr>
+          <tr><td>彰工</td><td>Vito</td><td>10</td><td><span class="badge badge-4">4</span></td><td></td></tr>
+          <tr><td>文華</td><td>陳彥霖</td><td>12</td><td><span class="badge badge-4">4</span></td><td></td></tr>
+          <tr><td>居仁</td><td>胡又勻</td><td>8</td><td><span class="badge badge-4">4</span></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="p2021" class="year-panel">
+      <table class="scores-table">
+        <thead><tr><th>學校</th><th>學生</th><th>年級</th><th>AP 成績</th></tr></thead>
+        <tbody>
+          <tr><td>華盛頓</td><td>Daniel</td><td>9</td><td><span class="badge badge-5">5</span></td></tr>
+          <tr><td>華盛頓</td><td>Nick</td><td>11</td><td><span class="badge badge-4">4</span></td></tr>
+          <tr><td>Kings High（美國）</td><td>Paul</td><td>12</td><td><span class="badge badge-4">4</span></td></tr>
+          <tr><td>華盛頓</td><td>Brian</td><td>11</td><td><span class="badge badge-3">3</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="p2020" class="year-panel">
+      <table class="scores-table">
+        <thead><tr><th>學校</th><th>學生</th><th>年級</th><th>AP 成績</th><th>錄取大學</th></tr></thead>
+        <tbody>
+          <tr><td>華盛頓</td><td>Beckham</td><td>11</td><td><span class="badge badge-4">4</span></td><td><span class="uni-tag">UCI CE</span></td></tr>
+          <tr><td>TAS（台北美國學校）</td><td>Justin</td><td>9</td><td><span class="badge badge-4">4</span></td><td></td></tr>
+          <tr><td>Morrison Academy</td><td>Darren</td><td>11</td><td><span class="badge badge-3">3</span></td><td><span class="uni-tag">UCLA Economics</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="eyebrow">師資介紹</div>
+    <h2 class="section-title">Ken 老師（陳凱宏）</h2>
+    <div class="about-grid">
+      <div>
+        <p class="about-bio">中興大學資訊工程研究所博士候選人，兼具學術研究、大學教學與業界實務三重背景，是中部地區 AP 電腦科學領域最資深的培訓師之一。結合程式設計與資安實務，培養學生具備 AP Computer Science A 與 Cybersecurity 高分能力。</p>
+        <ul class="exp-list">
+          <li class="exp-item"><div class="exp-dot"></div><span>矽品精密工業 — 系統工程師（資安與網路管理實務）</span></li>
+          <li class="exp-item"><div class="exp-dot"></div><span>巨匠電腦逢甲認證中心 — Java 原廠認證講師（16 年）</span></li>
+          <li class="exp-item"><div class="exp-dot"></div><span>國立大學資工(管)系講師（17 年教學經驗）</span></li>
+          <li class="exp-item"><div class="exp-dot"></div><span>中部私中國際部 AP CSA / AP CSP / Cybersecurity 講師（10 年）</span></li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-size:14px;font-weight:700;margin-bottom:1rem;">持有 IT 與資安認證</p>
+        <div class="cert-grid">
+          <div class="cert-chip">Oracle OCJP 5/6/7/8</div>
+          <div class="cert-chip">MCSE</div>
+          <div class="cert-chip">MCDBA</div>
+          <div class="cert-chip">CCNA</div>
+          <div class="cert-chip">CCNP</div>
+          <div class="cert-chip">LPIC Level-1</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <h2>準備好開始了嗎？</h2>
+  <p>預約免費諮詢，了解最適合孩子的課程方案</p>
+  <div class="contact-cards">
+    <div class="contact-card">
+      <div class="icon">📞</div>
+      <div class="info">
+        <div class="info-label">聯絡電話</div>
+        <div class="info-val">0933-735390</div>
+      </div>
+    </div>
+    <div class="contact-card">
+      <div class="icon">💬</div>
+      <div class="info">
+        <div class="info-label">Line ID</div>
+        <div class="info-val">kh-chen</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Ken CS Academy｜陳凱宏 AP Computer Science 專業培訓
+</footer>
+
+<script>
+function showYear(year, btn) {
+  document.querySelectorAll('.year-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.year-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('p' + year).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
